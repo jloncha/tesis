@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import py.una.pol.motg.objects.SustrateNetwork;
+import py.una.pol.motg.objects.VirtualNode;
 
 public class VirtualNetworkGenerator{
 	SustrateNetwork sustrateNetwork;
@@ -23,6 +24,11 @@ public class VirtualNetworkGenerator{
 				//Se comprueba que no tenga la palabra vd, que indica que es una demanda virtual, que s
 				//se convertira en una red virtual
 				if(linea.contains("vd")){
+					
+					VirtualNode nodoVirtual = new VirtualNode();
+					nodoVirtual.setCpu(Integer.valueOf(buffer.readLine()));
+					nodoVirtual.setCpuDisponible(nodoVirtual.getCpu());
+					
 					
 				}
 				

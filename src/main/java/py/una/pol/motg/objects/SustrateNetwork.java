@@ -44,57 +44,55 @@ public class SustrateNetwork {
 	 */
 	private void generateSustrateNetwork(){
 		//tenemos una red NSF
-		if (this.tipo.equals(TypeNetwork.NSFNET)){
+		if (this.tipo.equals(TypeNetwork.USNET)){
 			SustrateNode nodoA = new SustrateNode(0, 100);
-			listaNodos.add(nodoA);
+			this.listaNodos.add(nodoA);
 			SustrateNode nodoB = new SustrateNode(1, 100);
-			listaNodos.add(nodoB);
+			this.listaNodos.add(nodoB);
 			SustrateNode nodoC = new SustrateNode(2, 150);
-			listaNodos.add(nodoC);
+			this.listaNodos.add(nodoC);
 			SustrateNode nodoD = new SustrateNode(3, 170);
-			listaNodos.add(nodoD);
+			this.listaNodos.add(nodoD);
 			SustrateNode nodoE = new SustrateNode( 4, 200);
-			listaNodos.add(nodoE);
-			SustrateNode nodoF = new SustrateNode(5, 140); // 240
-			listaNodos.add(nodoF);
+			this.listaNodos.add(nodoE);
+			SustrateNode nodoF = new SustrateNode(5, 140); 
+			this.listaNodos.add(nodoF);
 			SustrateNode nodoG = new SustrateNode(6, 0);
-			listaNodos.add(nodoG);
+			this.listaNodos.add(nodoG);
 			SustrateNode nodoH = new SustrateNode(7, 210);
-			listaNodos.add(nodoH);
+			this.listaNodos.add(nodoH);
 			SustrateNode nodoI = new SustrateNode(8, 120);
-			listaNodos.add(nodoI);
+			this.listaNodos.add(nodoI);
 			SustrateNode nodoJ = new SustrateNode(9, 125); 
-			listaNodos.add(nodoJ);
+			this.listaNodos.add(nodoJ);
 			SustrateNode nodoK = new SustrateNode(10, 180);
-			listaNodos.add(nodoK);
+			this.listaNodos.add(nodoK);
 			SustrateNode nodoL = new SustrateNode(11, 110);
-			listaNodos.add(nodoL);
+			this.listaNodos.add(nodoL);
 			SustrateNode nodoM = new SustrateNode(12, 145);
-			listaNodos.add(nodoM);
+			this.listaNodos.add(nodoM);
 			SustrateNode nodoN = new SustrateNode(13, 190);
-			listaNodos.add(nodoN);
+			this.listaNodos.add(nodoN);
 			SustrateNode nodoO = new SustrateNode(14, 230);
-			listaNodos.add(nodoO);
+			this.listaNodos.add(nodoO);
 			SustrateNode nodoP = new SustrateNode(15, 0);
-			listaNodos.add(nodoP);
+			this.listaNodos.add(nodoP);
 			SustrateNode nodoQ = new SustrateNode(16, 200);
-			listaNodos.add(nodoQ);
+			this.listaNodos.add(nodoQ);
 			SustrateNode nodoR = new SustrateNode(17, 100); 
-			listaNodos.add(nodoR);
+			this.listaNodos.add(nodoR);
 			SustrateNode nodoS = new SustrateNode(18, 160);
-			listaNodos.add(nodoS);
+			this.listaNodos.add(nodoS);
 			SustrateNode nodoT = new SustrateNode(19, 0);
-			listaNodos.add(nodoT);
+			this.listaNodos.add(nodoT);
 			SustrateNode nodoU = new SustrateNode(20, 250);
-			listaNodos.add(nodoU);
+			this.listaNodos.add(nodoU);
 			SustrateNode nodoV = new SustrateNode(21, 110);
-			listaNodos.add(nodoV);
+			this.listaNodos.add(nodoV);
 			SustrateNode nodoW = new SustrateNode(22, 130);
-			listaNodos.add(nodoW);
+			this.listaNodos.add(nodoW);
 			SustrateNode nodoX = new SustrateNode(23, 240);
-			listaNodos.add(nodoX);
-			
-			this.setListaNodos(listaNodos);
+			this.listaNodos.add(nodoX);
 			
 			//Generamos los enlaces del Nodo A (1)
 			SustrateLink linkAB = new SustrateLink(nodoB, 80);
@@ -314,8 +312,7 @@ public class SustrateNetwork {
 			SustrateLink enlaceXW = new SustrateLink(nodoW,90);
 			nodoX.addLink(enlaceXW);
 			SustrateLink enlaceXR = new SustrateLink(nodoR,90);
-			nodoX.addLink(enlaceXR);
-						
+			nodoX.addLink(enlaceXR);	
 			
 		}
 	}
