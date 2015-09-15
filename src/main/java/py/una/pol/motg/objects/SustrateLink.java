@@ -11,6 +11,11 @@ public class SustrateLink {
 
 	public SustrateLink() {
 	}
+	
+	public SustrateLink(SustrateNode nodoDestino, Integer distancia){
+		this.nodoDestino = nodoDestino;
+		this.distancia = distancia;
+	}
 
 	public SustrateLink (Integer distancia){
 		this.nodoDestino = new SustrateNode();
@@ -32,5 +37,6 @@ public class SustrateLink {
 	public void setDistancia(Integer distancia) {
 		this.distancia = distancia;
 	}
+	
 	
 }

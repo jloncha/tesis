@@ -17,7 +17,7 @@ public class SustrateNode {
 	public SustrateNode() {
 	}
 
-	public SustrateNode(String nombre, Integer id, int cpu) {
+	public SustrateNode(Integer id, int cpu) {
 		this.id = id;
 		this.cpu = cpu;
 		this.cpuDisponible = cpu;
