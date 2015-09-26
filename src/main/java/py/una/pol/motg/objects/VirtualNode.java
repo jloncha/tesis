@@ -45,6 +45,9 @@ public class VirtualNode {
 	public void setListaEnlaces(List<VirtualLink> listaEnlaces) {
 		this.listaEnlaces = listaEnlaces;
 	}
+	public void addLink(VirtualLink enlaceVirtual){
+		this.listaEnlaces.add(enlaceVirtual);
+	}
 	
 	
 }
