@@ -1,6 +1,9 @@
 package py.una.pol.motg;
 
-import py.una.pol.motg.objects.SustrateNetwork;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import py.una.pol.motg.impl.VirtualNetworkGenerator;
 
 /**
  * @author Jean
@@ -8,12 +11,18 @@ import py.una.pol.motg.objects.SustrateNetwork;
  */
 public class Main 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
         //Clase principal
     	//Primero que nada, se debe definir que red de sustrato vamos a usar
     	System.out.println("Se inicia el programa principal");
-    	SustrateNetwork red = new SustrateNetwork();
+    	VirtualNetworkGenerator generador = new VirtualNetworkGenerator();
+    	try {
+    		generador.getDemands();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     }
     

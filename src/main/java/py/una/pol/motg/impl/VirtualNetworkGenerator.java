@@ -1,7 +1,6 @@
 package py.una.pol.motg.impl;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,15 +13,15 @@ import py.una.pol.motg.objects.VirtualNode;
 
 public class VirtualNetworkGenerator{
 	SustrateNetwork sustrateNetwork;
-	VirtualNetwork redVirtual;
+	VirtualNetwork redVirtual = new VirtualNetwork();
 	List<VirtualNode> listaNodos = new ArrayList<VirtualNode>();
 	
 	/****
 	 * Metodo que se encarga de leer las redes virtuales desde el archivo de configuracion
-	 * @throws FileNotFoundException 
+	 * @throws IOException 
 	 */
-	public void getDemands() throws FileNotFoundException{
-		BufferedReader buffer = new BufferedReader(new FileReader("file.txt"));
+	public void getDemands() throws IOException{
+		BufferedReader buffer = new BufferedReader(new FileReader("C:\\Users\\Jean\\Documents\\tesis\\src\\main\\java\\requerimientos\\NodosVirtuales.txt"));
 		try {
 			String linea = buffer.readLine();
 			//Se comprueba que no se haya llegado al final de la linea
@@ -32,6 +31,7 @@ public class VirtualNetworkGenerator{
 				if(linea.contains("vd")){
 					
 					VirtualNode nodoVirtual = new VirtualNode();
+					nodoVirtual.setId(Integer.valueOf(buffer.readLine()));
 					nodoVirtual.setCpu(Integer.valueOf(buffer.readLine()));
 					nodoVirtual.setCpuDisponible(nodoVirtual.getCpu());
 					//Procedemos a leer los enlaces
@@ -47,9 +47,17 @@ public class VirtualNetworkGenerator{
 				}
 				
 			}
+			
+			for (VirtualNode e: redVirtual.getListaNodos()){
+				System.out.println(e.getId());
+				System.out.println(e.getCpu());
+			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+		}
+		finally{
+			buffer.close();
 		}
 	}
 }
