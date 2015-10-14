@@ -11,6 +11,7 @@ public class VirtualNode {
 	private List<VirtualLink> listaEnlaces;
 	
 	public VirtualNode() {
+		this.listaEnlaces = new ArrayList<VirtualLink>();
 		
 	}
 

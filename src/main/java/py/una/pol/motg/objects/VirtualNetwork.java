@@ -5,6 +5,7 @@ import java.util.List;
 
 public class VirtualNetwork {
 
+	private Integer idRedVirtual;
 	private List<VirtualNode> listaNodos;
 	
 
@@ -34,4 +35,13 @@ public class VirtualNetwork {
 		return resp;
 
 	}
+
+	public Integer getIdRedVirtual() {
+		return idRedVirtual;
+	}
+
+	public void setIdRedVirtual(Integer idRedVirtual) {
+		this.idRedVirtual = idRedVirtual;
+	}
+	
 }
