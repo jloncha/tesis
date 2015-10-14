@@ -19,6 +19,7 @@ public class Main
     	VirtualNetworkGenerator generador = new VirtualNetworkGenerator();
     	try {
     		generador.getDemands();
+    		generador.selectRedesAleatorio();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

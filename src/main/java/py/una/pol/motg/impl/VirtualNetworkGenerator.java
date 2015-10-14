@@ -5,15 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import py.una.pol.motg.objects.SustrateNetwork;
 import py.una.pol.motg.objects.VirtualLink;
 import py.una.pol.motg.objects.VirtualNetwork;
 import py.una.pol.motg.objects.VirtualNode;
+import py.una.pol.motg.utils.Constantes;
 
 public class VirtualNetworkGenerator{
 	SustrateNetwork sustrateNetwork;
-	List<VirtualNetwork> redesVirtual = new ArrayList<VirtualNetwork>();
+	List<VirtualNetwork> redesVirtuales = new ArrayList<VirtualNetwork>();
+	List<VirtualNetwork> redesRandom = new ArrayList<VirtualNetwork>();
 	List<VirtualNode> listaNodos = new ArrayList<VirtualNode>();
 	
 	/****
@@ -44,7 +47,7 @@ public class VirtualNetworkGenerator{
 					if(!idRedAnterior.equals(idRedActual)){
 						//Si empieza una nueva red Virtual, la agregamos a nuestra topologia,
 						//e instanciamos una nueva red virtual (nuevo vd)
-						redesVirtual.add(redVirtual);
+						redesVirtuales.add(redVirtual);
 						redVirtual = new VirtualNetwork();
 						redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
 						idRedAnterior = idRedActual;
@@ -78,6 +81,40 @@ public class VirtualNetworkGenerator{
 		}
 		finally{
 			buffer.close();
+		}
+	}
+	/****
+	 * Funcion que selecciona de manera aleatoria redes virtuales de la lista 
+	 * total de redes virtuales
+	 */
+	public void selectRedesAleatorio() {
+		Random random = new Random();
+		Integer i = 0;
+		try {
+			// Seleccionamos las redes de forma aleatorias
+			while (i < Constantes.CANT_REDES_V_SELEC) {
+				VirtualNetwork redAux = new VirtualNetwork();
+				redAux = this.redesVirtuales.get(random
+						.nextInt(Constantes.CANT_REDES_VIRTUALES));
+				if (!this.redesRandom.contains(redAux)) {
+					this.redesRandom.add(redAux);
+					i++;
+				}
+			}
+			/*for (VirtualNetwork vn : this.redesRandom) {
+				System.out.println("Red Nro " + vn.getIdRedVirtual());
+				for (VirtualNode n : vn.getListaNodos()) {
+					System.out.println("Nodo " + n.getId() + "- Red "
+							+ vn.getIdRedVirtual());
+					for (VirtualLink l : n.getListaEnlaces()) {
+						System.out.println("Enlace " + n.getId() + " ---> "
+								+ l.getNodoDestino().getId() + " Red"
+								+ vn.getIdRedVirtual());
+					}
+				}
+			}*/
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
