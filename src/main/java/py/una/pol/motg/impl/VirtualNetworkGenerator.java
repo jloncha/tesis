@@ -32,22 +32,24 @@ public class VirtualNetworkGenerator{
 				//Se comprueba que no tenga la palabra vd, que indica que es una demanda virtual, que s
 				//se convertira en una red virtual
 				if(linea.contains("vd")){
+					//Cuando el archivo inicia, tiene un caracter mas (null), por eso esta validacion
 					if(linea.length()==4){
 						idRedActual = linea.substring(3);
 					}
+					//Significa que no es inicio de Linea
 					else{
 						idRedActual = linea.substring(2);
 					}
+					//Comprobamos que no sea el inicio de una nueva red virtual
 					if(!idRedAnterior.equals(idRedActual)){
+						//Si empieza una nueva red Virtual, la agregamos a nuestra topologia,
+						//e instanciamos una nueva red virtual (nuevo vd)
 						redesVirtual.add(redVirtual);
 						redVirtual = new VirtualNetwork();
 						redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
 						idRedAnterior = idRedActual;
 					}
-					/*if(!idRedAnterior.equals(linea.substring(3))){
-						redVirtual = new VirtualNetwork();
-						redVirtual.setIdRedVirtual(Integer.parseInt(linea.substring(3)));
-					}*/
+					//Instanciamos los nodos de la red virtual
 					VirtualNode nodoVirtual = new VirtualNode();
 					nodoVirtual.setId(Integer.valueOf(buffer.readLine()));
 					nodoVirtual.setCpu(Integer.valueOf(buffer.readLine()));
@@ -55,33 +57,19 @@ public class VirtualNetworkGenerator{
 					//Procedemos a leer los enlaces
 					redVirtual.addNodo(nodoVirtual);
 				}
+				//Caso de ser un enlace, instanciamos y agregamos a la red virtual
 				if(linea.contains("enlace")){
 					VirtualLink enlaceVirtual = new VirtualLink();
 					VirtualNode nodoOrigen = new VirtualNode();
 					linea = buffer.readLine();
 					nodoOrigen =redVirtual.getNodoByID(Integer.parseInt(buffer.readLine()));
-					enlaceVirtual.setNodoDestino(redVirtual.getNodoByID(Integer.parseInt(buffer.readLine()))); 
-					//nodoOrigen = redesVirtual.getNodoByID(Integer.parseInt(buffer.readLine()));
-					//enlaceVirtual.setNodoDestino(redesVirtual.getNodoByID(Integer.parseInt(buffer.readLine()))); 
+					enlaceVirtual.setNodoDestino(redVirtual.getNodoByID(Integer.parseInt(buffer.readLine())));  
 					enlaceVirtual.setDistancia(Integer.parseInt(buffer.readLine()));
 					redVirtual.getNodoByID(nodoOrigen.getId()).addLink(enlaceVirtual);
-					//redesVirtual.getNodoByID(nodoOrigen.getId()).addLink(enlaceVirtual);
 				}
 				
-				linea = buffer.readLine();
-				/*if(!idRedActual.equals(idRedAnterior)){
-					redVirtual.setIdRedVirtual(Integer.parseInt(idRedAnterior));
-					redesVirtual.add(redVirtual);
-					redVirtual = new VirtualNetwork();
-					redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
-					idRedAnterior = idRedActual;
-				}*/
-				
-			}
-			
-			for (VirtualNode e: redesVirtual.get(0).getListaNodos()){
-				System.out.println(e.getId());
-				System.out.println(e.getCpu());
+				redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
+				linea = buffer.readLine(); //Leemos la siguiente linea
 			}
 			
 		} catch (IOException e) {
