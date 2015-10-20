@@ -5,15 +5,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import py.una.pol.motg.objects.SustrateNetwork;
 import py.una.pol.motg.objects.VirtualLink;
 import py.una.pol.motg.objects.VirtualNetwork;
 import py.una.pol.motg.objects.VirtualNode;
+import py.una.pol.motg.utils.Constantes;
 
 public class VirtualNetworkGenerator{
 	SustrateNetwork sustrateNetwork;
-	List<VirtualNetwork> redesVirtual = new ArrayList<VirtualNetwork>();
+	List<VirtualNetwork> redesVirtuales = new ArrayList<VirtualNetwork>();
+	List<VirtualNetwork> redesRandom = new ArrayList<VirtualNetwork>();
 	List<VirtualNode> listaNodos = new ArrayList<VirtualNode>();
 	
 	/****
@@ -32,22 +35,24 @@ public class VirtualNetworkGenerator{
 				//Se comprueba que no tenga la palabra vd, que indica que es una demanda virtual, que s
 				//se convertira en una red virtual
 				if(linea.contains("vd")){
+					//Cuando el archivo inicia, tiene un caracter mas (null), por eso esta validacion
 					if(linea.length()==4){
 						idRedActual = linea.substring(3);
 					}
+					//Significa que no es inicio de Linea
 					else{
 						idRedActual = linea.substring(2);
 					}
+					//Comprobamos que no sea el inicio de una nueva red virtual
 					if(!idRedAnterior.equals(idRedActual)){
-						redesVirtual.add(redVirtual);
+						//Si empieza una nueva red Virtual, la agregamos a nuestra topologia,
+						//e instanciamos una nueva red virtual (nuevo vd)
+						redesVirtuales.add(redVirtual);
 						redVirtual = new VirtualNetwork();
 						redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
 						idRedAnterior = idRedActual;
 					}
-					/*if(!idRedAnterior.equals(linea.substring(3))){
-						redVirtual = new VirtualNetwork();
-						redVirtual.setIdRedVirtual(Integer.parseInt(linea.substring(3)));
-					}*/
+					//Instanciamos los nodos de la red virtual
 					VirtualNode nodoVirtual = new VirtualNode();
 					nodoVirtual.setId(Integer.valueOf(buffer.readLine()));
 					nodoVirtual.setCpu(Integer.valueOf(buffer.readLine()));
@@ -55,33 +60,19 @@ public class VirtualNetworkGenerator{
 					//Procedemos a leer los enlaces
 					redVirtual.addNodo(nodoVirtual);
 				}
+				//Caso de ser un enlace, instanciamos y agregamos a la red virtual
 				if(linea.contains("enlace")){
 					VirtualLink enlaceVirtual = new VirtualLink();
 					VirtualNode nodoOrigen = new VirtualNode();
 					linea = buffer.readLine();
 					nodoOrigen =redVirtual.getNodoByID(Integer.parseInt(buffer.readLine()));
-					enlaceVirtual.setNodoDestino(redVirtual.getNodoByID(Integer.parseInt(buffer.readLine()))); 
-					//nodoOrigen = redesVirtual.getNodoByID(Integer.parseInt(buffer.readLine()));
-					//enlaceVirtual.setNodoDestino(redesVirtual.getNodoByID(Integer.parseInt(buffer.readLine()))); 
+					enlaceVirtual.setNodoDestino(redVirtual.getNodoByID(Integer.parseInt(buffer.readLine())));  
 					enlaceVirtual.setDistancia(Integer.parseInt(buffer.readLine()));
 					redVirtual.getNodoByID(nodoOrigen.getId()).addLink(enlaceVirtual);
-					//redesVirtual.getNodoByID(nodoOrigen.getId()).addLink(enlaceVirtual);
 				}
 				
-				linea = buffer.readLine();
-				/*if(!idRedActual.equals(idRedAnterior)){
-					redVirtual.setIdRedVirtual(Integer.parseInt(idRedAnterior));
-					redesVirtual.add(redVirtual);
-					redVirtual = new VirtualNetwork();
-					redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
-					idRedAnterior = idRedActual;
-				}*/
-				
-			}
-			
-			for (VirtualNode e: redesVirtual.get(0).getListaNodos()){
-				System.out.println(e.getId());
-				System.out.println(e.getCpu());
+				redVirtual.setIdRedVirtual(Integer.parseInt(idRedActual));
+				linea = buffer.readLine(); //Leemos la siguiente linea
 			}
 			
 		} catch (IOException e) {
@@ -90,6 +81,40 @@ public class VirtualNetworkGenerator{
 		}
 		finally{
 			buffer.close();
+		}
+	}
+	/****
+	 * Funcion que selecciona de manera aleatoria redes virtuales de la lista 
+	 * total de redes virtuales
+	 */
+	public void selectRedesAleatorio() {
+		Random random = new Random();
+		Integer i = 0;
+		try {
+			// Seleccionamos las redes de forma aleatorias
+			while (i < Constantes.CANT_REDES_V_SELEC) {
+				VirtualNetwork redAux = new VirtualNetwork();
+				redAux = this.redesVirtuales.get(random
+						.nextInt(Constantes.CANT_REDES_VIRTUALES));
+				if (!this.redesRandom.contains(redAux)) {
+					this.redesRandom.add(redAux);
+					i++;
+				}
+			}
+			/*for (VirtualNetwork vn : this.redesRandom) {
+				System.out.println("Red Nro " + vn.getIdRedVirtual());
+				for (VirtualNode n : vn.getListaNodos()) {
+					System.out.println("Nodo " + n.getId() + "- Red "
+							+ vn.getIdRedVirtual());
+					for (VirtualLink l : n.getListaEnlaces()) {
+						System.out.println("Enlace " + n.getId() + " ---> "
+								+ l.getNodoDestino().getId() + " Red"
+								+ vn.getIdRedVirtual());
+					}
+				}
+			}*/
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
