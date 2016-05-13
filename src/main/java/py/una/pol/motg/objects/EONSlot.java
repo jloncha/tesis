@@ -11,7 +11,7 @@ public class EONSlot {
 	private Integer idFibra;
 	private Number frecInicio;  ///representa la minima frecuencia con que inicia el slot
 	private Number tamanho; 	///representa el tamanho de la frecuencia
-	
+	private boolean ocupado;
 	
 	public EONSlot() {
 	}
@@ -39,6 +39,14 @@ public class EONSlot {
 	}
 	public void setTamanho(Number tamanho) {
 		this.tamanho = tamanho;
+	}
+
+	public boolean isOcupado() {
+		return ocupado;
+	}
+
+	public void setOcupado(boolean ocupado) {
+		this.ocupado = ocupado;
 	}
 	
 }

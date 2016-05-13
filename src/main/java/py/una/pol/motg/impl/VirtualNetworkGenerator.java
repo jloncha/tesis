@@ -101,7 +101,7 @@ public class VirtualNetworkGenerator{
 					i++;
 				}
 			}
-			/*for (VirtualNetwork vn : this.redesRandom) {
+			for (VirtualNetwork vn : this.redesRandom) {
 				System.out.println("Red Nro " + vn.getIdRedVirtual());
 				for (VirtualNode n : vn.getListaNodos()) {
 					System.out.println("Nodo " + n.getId() + "- Red "
@@ -112,7 +112,7 @@ public class VirtualNetworkGenerator{
 								+ vn.getIdRedVirtual());
 					}
 				}
-			}*/
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

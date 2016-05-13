@@ -13,6 +13,7 @@ public class SustrateNode {
 	private Integer cpu;
 	private Integer cpuDisponible;
 	private List<SustrateLink> listaEnlaces;
+	
 
 	public SustrateNode() {
 	}
