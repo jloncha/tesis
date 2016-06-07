@@ -216,8 +216,8 @@ package py.una.pol.motg;
      CommandLine(String[] args) {
          _verbose = false;
          if (args.length < 1) {
-         _modelFileName = ".\\mulprod.mod";
-             _dataFileNames.add(".\\mulprod.dat");
+         _modelFileName = ".\\TutoModel.mod";
+             _dataFileNames.add(".\\TutoModel.dat");
          }
          int i = 0;
          for (i = 0; i < args.length; i++) {
