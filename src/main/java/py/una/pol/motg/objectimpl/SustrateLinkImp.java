@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SustrateLinkImp {
 	List<SustrateNodeImpl> nodos;
-	List<EONSlot> slots;	
+	List<EONSlotImpl> slots;	
 	
 	public SustrateLinkImp() {
 
@@ -15,10 +15,10 @@ public class SustrateLinkImp {
 	public void setNodos(List<SustrateNodeImpl> nodos) {
 		this.nodos = nodos;
 	}
-	public List<EONSlot> getSlots() {
+	public List<EONSlotImpl> getSlots() {
 		return slots;
 	}
-	public void setSlots(List<EONSlot> slots) {
+	public void setSlots(List<EONSlotImpl> slots) {
 		this.slots = slots;
 	}
 
