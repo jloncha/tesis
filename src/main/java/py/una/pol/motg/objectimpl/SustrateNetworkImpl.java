@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SustrateNetwork {
+public class SustrateNetworkImpl {
 	private List<SustrateNodeImpl> listaNodos;
 	public enum TypeNetwork{
 		USNET,
@@ -13,11 +13,11 @@ public class SustrateNetwork {
 	
 	TypeNetwork tipo;
 	
-	public SustrateNetwork (){
+	public SustrateNetworkImpl (){
 		this.listaNodos = new ArrayList<SustrateNodeImpl>();
 	}
 	
-	public SustrateNetwork (TypeNetwork tipo){
+	public SustrateNetworkImpl (TypeNetwork tipo){
 		this.tipo = tipo;
 	}
 

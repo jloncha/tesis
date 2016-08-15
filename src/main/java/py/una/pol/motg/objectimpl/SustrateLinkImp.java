@@ -1,5 +1,6 @@
 package py.una.pol.motg.objectimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SustrateLinkImp {
@@ -7,7 +8,8 @@ public class SustrateLinkImp {
 	List<EONSlotImpl> slots;	
 	
 	public SustrateLinkImp() {
-
+		nodos = new ArrayList<SustrateNodeImpl>();
+		slots = new ArrayList<EONSlotImpl>();
 	}
 	public List<SustrateNodeImpl> getNodos() {
 		return nodos;
