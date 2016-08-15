@@ -47,18 +47,20 @@ public class Main
 			}
 		}*/
     	
-    	LAGImpl lag = new LAGImpl();
-    	lag.setRedSustrato(redFisica.getNetwork());
-    	List<SustrateNetworkImpl> lista = new ArrayList<SustrateNetworkImpl>();
-    	for (int i = 0; i < redFisica.getB(); i++) {
-    		SustrateNetworkImpl capa = lag.generarCapas(1, i + 1);
-    		lista.add(capa);
-		}
     	
-    	int i = 1;
+    	/*List<SustrateNetworkImpl> lista = new ArrayList<SustrateNetworkImpl>();
+    	for (int i = 0; i < redFisica.getB(); i++) {*/
+    		LAGImpl lag = new LAGImpl();
+        	lag.setRedSustrato(redFisica.getNetwork());
+        	//k se le pasa uno menos del que se quiere porque en java en indice empieza en 0
+    		SustrateNetworkImpl capa = lag.generarCapas(3, 2);
+    		/*lista.add(capa);
+		}*/
+    	
+    	/*int i = 1;
     	for (SustrateNetworkImpl sustrateNetworkImpl : lista) {
-    		System.out.println("#################CAPA :" + i);
-    		for (SustrateNodeImpl nodo : sustrateNetworkImpl.getListaNodos()) {
+    		System.out.println("#################CAPA :" + i);*/
+    		for (SustrateNodeImpl nodo : capa.getListaNodos()) {
         		System.out.println("#################");
         		System.out.println("Nodo " + nodo.getId());
     			for (SustrateLinkImp enlaces : nodo.getListaEnlaces()) {
@@ -66,15 +68,15 @@ public class Main
     				System.out.println(enlaces.getNodos().get(0).getId());
     				System.out.println(enlaces.getNodos().get(1).getId());
     				
-    				for (EONSlotImpl slots : enlaces.getSlots()) {
+    				/*for (EONSlotImpl slots : enlaces.getSlots()) {
     					System.out.println("Slots");
     					System.out.println(slots.getIdSlot());
     					System.out.println(slots.isOcupado());
-    				}
+    				}*/
     			}
     		}
-    		i = i+1;
-		}
+    		/*i = i+1;
+		}*/
     	
     }
     

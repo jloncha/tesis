@@ -42,7 +42,7 @@ public class SubstrateNetworkGenerator {
 	public void generar() throws IOException{
 		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\SustrateNetwork.txt"));
 		List<SustrateNodeImpl> nodos = new ArrayList<SustrateNodeImpl>();
-		
+		Integer id = 1;
 		try {
 			b = Integer.valueOf(buffer.readLine());
 			System.out.println("Nro de frecuency slots total B: " + b);
@@ -69,14 +69,15 @@ public class SubstrateNetworkGenerator {
 				
 				List<EONSlotImpl> slots = new ArrayList<EONSlotImpl>();
 				//el valor del 4 se definio de acuerdo a nuestro archivo si modificamos el archivo a n hay que cambiar este valor
-				Integer idSlot =1;
+				//Integer idSlot =1;
 				for (int i = 4; i < b + 4; i++) {
 					
 					EONSlotImpl slot = new EONSlotImpl();
-					slot.setIdSlot(idSlot);
+					slot.setIdSlot(id);
 					slot.setOcupado(Boolean.valueOf(datos[i]));
 					slots.add(slot);
-					idSlot = idSlot + 1;
+					id = id + 1;
+					//idSlot = idSlot + 1;
 				}
 				link.setSlots(slots);
 				if(nodos.contains(node1)){
