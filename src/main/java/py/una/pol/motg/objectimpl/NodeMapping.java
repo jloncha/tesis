@@ -30,10 +30,10 @@ public class NodeMapping {
 				if(!laLRCsub.getListaNodos().get(j).getMapeado()){
 					if(laLRCsub.getListaNodos().get(j).getCpu() >= lRCvirtual.getListaNodos().get(i).getCpu() 
 							&& laLRCsub.getListaNodos().get(j).getListaEnlaces().size() >= lRCvirtual.getListaNodos().get(i).getListaEnlaces().size()){
-						System.out.println("Asigna el nodo sustrato " + laLRCsub.getListaNodos().get(j).getId() +
+						/*System.out.println("Asigna el nodo sustrato " + laLRCsub.getListaNodos().get(j).getId() +
 								" a nodo request " + lRCvirtual.getListaNodos().get(i).getId());
-						System.out.println("J " + j + " I " + i);
-						map.setMapear(j, i, 1);
+						System.out.println("J " + j + " I " + i);*/
+						map.setMapear(laLRCsub.getListaNodos().get(j).getId() - 1 , lRCvirtual.getListaNodos().get(i).getId() - 1, 1);
 						laLRCsub.getListaNodos().get(j).setMapeado(true);
 						mapeado.set(cont, true);
 						break;
