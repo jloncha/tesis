@@ -8,13 +8,15 @@ import java.util.List;
  * Clase que abstrae un nodo fisico 
  * 
  */
-public class SustrateNodeImpl {
+public class SustrateNodeImpl implements Comparable<SustrateNodeImpl>{
 	private Integer id;
 	private Integer cpu;
 	private Integer cpuDisponible;
+	private Integer laLRC;
+	private Integer LRC;
 	private List<SustrateLinkImp> listaEnlaces;
+	private boolean mapeado;
 	
-
 	public SustrateNodeImpl() {
 	}
 
@@ -23,6 +25,22 @@ public class SustrateNodeImpl {
 		this.cpu = cpu;
 		this.cpuDisponible = cpu;
 		this.listaEnlaces = new ArrayList<SustrateLinkImp>();
+	}
+	
+	public Integer getLaLRC() {
+		return laLRC;
+	}
+
+	public void setLaLRC(Integer laLRC) {
+		this.laLRC = laLRC;
+	}
+
+	public Integer getLRC() {
+		return LRC;
+	}
+
+	public void setLRC(Integer lRC) {
+		LRC = lRC;
 	}
 
 	public Integer getId() {
@@ -59,6 +77,19 @@ public class SustrateNodeImpl {
 	
 	public void addLink (SustrateLinkImp enlace){
 		this.listaEnlaces.add(enlace);
+	}
+
+	public boolean getMapeado() {
+		return mapeado;
+	}
+
+	public void setMapeado(boolean mapeado) {
+		this.mapeado = mapeado;
+	}
+
+	public int compareTo(SustrateNodeImpl sustrate) {
+		int cantidadComparada = ((SustrateNodeImpl) sustrate).getLaLRC();
+		return this.getLaLRC() - cantidadComparada;
 	}
 	
 
