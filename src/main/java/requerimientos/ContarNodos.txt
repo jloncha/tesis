@@ -1,0 +1,9 @@
+5
+1;10;4;10;true;true;false;false;true
+4;10;3;10;true;true;false;false;false
+3;10;2;10;true;true;false;false;false
+5;10;3;10;true;true;false;false;true
+3;10;7;10;true;true;false;false;false
+7;10;6;10;true;true;false;false;false
+9;10;8;10;true;true;false;false;true
+10;10;9;10;true;true;false;false;false
