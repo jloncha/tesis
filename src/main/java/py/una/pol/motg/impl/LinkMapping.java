@@ -14,6 +14,7 @@ public class LinkMapping {
 			//Usando el algoritmo de Dijkstra para camino mas corto
 			//Buscamos el enlace
 			//Aca tengo que implementar la llamada a Dijkstra
+			
 			if (resp) {
 				for (Integer i = redSustrato.getListaNodos().size() - 1; i >= 0; i--) {
 					SustrateNodeImpl nodo = redSustrato.getListaNodos().get(i);
