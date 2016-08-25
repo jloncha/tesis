@@ -11,7 +11,7 @@ public class SubstrateNetworkGeneDir {
 	
 	private SustrateNetworkDir network = new SustrateNetworkDir();
 	
-	private SustrateNetworkDir virtualNetwork = new SustrateNetworkDir();
+	private VirtualNetworkDir virtualNetwork = new VirtualNetworkDir();
 	
 	//es el nro total de frecuency slots
 	private Integer b;
@@ -21,18 +21,18 @@ public class SubstrateNetworkGeneDir {
 	
 	public SubstrateNetworkGeneDir() throws IOException {
 		this.generar();
-	//	this.generarVirtual();
+		//this.generarVirtual();
 	}
 
 	public SustrateNetworkDir getNetwork() {
 		return network;
 	}
 
-	public SustrateNetworkDir getVirtualNetwork() {
+	public VirtualNetworkDir getVirtualNetwork() {
 		return virtualNetwork;
 	}
 
-	public void setVirtualNetwork(SustrateNetworkDir virtualNetwork) {
+	public void setVirtualNetwork(VirtualNetworkDir virtualNetwork) {
 		this.virtualNetwork = virtualNetwork;
 	}
 
@@ -57,7 +57,7 @@ public class SubstrateNetworkGeneDir {
 	}
 
 	public void generar() throws IOException{
-		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\SustrateNetwork.txt"));
+		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\ContarNodos.txt"));
 		List<SustrateNodeDir> nodos = new ArrayList<SustrateNodeDir>();
 		Integer id = 1;
 		try {
@@ -127,24 +127,32 @@ public class SubstrateNetworkGeneDir {
 		}
 	}
 	
-	/*public void generarVirtual() throws IOException {
+	public void generarVirtual() throws IOException {
 		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\VON.txt"));
-		List<SustrateNodeDir> nodos = new ArrayList<SustrateNodeDir>();
+		List<VirtualNodeDir> nodos = new ArrayList<VirtualNodeDir>();
+		Integer requerimientoGhz = 0;
 		try {
-			n = Integer.valueOf(buffer.readLine());
+			requerimientoGhz = Integer.valueOf(buffer.readLine());
+			if(requerimientoGhz % 12.5 == 0){
+				n = (int) (requerimientoGhz / 12.5);
+			}
+			else {
+				n = (int) (requerimientoGhz / 12.5) + 1; 
+			}
 			this.setN(n);
 			System.out.println("Nro de frecuency slots requerido N: " + n);
 			String linea = buffer.readLine();
-			SustrateNodeDir node1 = null;
-			SustrateNodeDir node2 = null;
+			VirtualNodeDir node1 = null;
+			VirtualNodeDir node2 = null;
 			while(linea != null){
 				
 				String[] datos = linea.split(";");
-				node1 = new SustrateNodeDir(Integer.valueOf(datos[0]), Integer.valueOf(datos[1]));;
-				node2 = new SustrateNodeDir(Integer.valueOf(datos[2]), Integer.valueOf(datos[3]));
-				SustrateLinkDir link = new SustrateLinkDir();
+				node1 = new VirtualNodeDir(Integer.valueOf(datos[0]), Integer.valueOf(datos[1]));;
+				node2 = new VirtualNodeDir(Integer.valueOf(datos[2]), Integer.valueOf(datos[3]));
+				VirtualLinkDir link = new VirtualLinkDir();
+				VirtualLinkDir linkDest = new VirtualLinkDir();
 				
-				for (SustrateNodeDir node : nodos) {
+				for (VirtualNodeDir node : nodos) {
 					if(node.getId() == Integer.valueOf(datos[0])){
 						node1 = node;
 					}
@@ -152,30 +160,21 @@ public class SubstrateNetworkGeneDir {
 						node2 = node;
 					}
 				}
-				link.getNodos().add(node1);
-				link.getNodos().add(node2);*/
-				
-				/*List<EONSlotDir> slots = new ArrayList<EONSlotDir>();
-				//el valor del 4 se definio de acuerdo a nuestro archivo si modificamos el archivo a n hay que cambiar este valor
-				//Integer idSlot =1;
-				for (int i = 4; i < b + 4; i++) {
-					
-					EONSlotDir slot = new EONSlotDir();
-					slot.setIdSlot(id);
-					slot.setOcupado(Boolean.valueOf(datos[i]));
-					slots.add(slot);
-					id = id + 1;
-					//idSlot = idSlot + 1;
-				}
-				link.setSlots(slots);*/
-				/*if(nodos.contains(node1)){
+				link.setNodoVirtual(node2);
+				link.setRequerimientoEnlace(n);
+				linkDest.setNodoVirtual(node1);
+				linkDest.setRequerimientoEnlace(n);
+			
+				//Actualizamos los nodos que estan en la red virtual
+				if(nodos.contains(node1)){
+					//Si es que existe, o sea no es la primera vez, removemos el existente
 					nodos.remove(node1);
 				}
 				if(nodos.contains(node2)){
 					nodos.remove(node2);
 				}
-				node1.addLink(link);
-				node2.addLink(link);
+				node1.getListaEnlaces().add(link);
+				node2.getListaEnlaces().add(linkDest);
 
 				nodos.add(node1);
 				nodos.add(node2);
@@ -183,12 +182,12 @@ public class SubstrateNetworkGeneDir {
 				linea = buffer.readLine();
 			}
 			
-			virtualNetwork.setListaNodos(nodos);
+			virtualNetwork.setNodos(nodos);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		finally{
 			buffer.close();
 		}
-	}*/
+	}
 }
