@@ -30,7 +30,8 @@ public class Main {
     	
     	SubstrateNetworkGeneDir redFisica = new SubstrateNetworkGeneDir();
     	Dijkstra dikjstra = new Dijkstra(redFisica.getNetwork());
-    	dikjstra.doDijkstra(1);
+    	//indice grafo - 1
+    	dikjstra.doDijkstra(0);
     	
     	/*for (SustrateNodeDir nodo : redFisica.getNetwork().getListaNodos()) {
     		System.out.println("#################");

@@ -77,7 +77,7 @@ public class Dijkstra {
 		if (this.previo[destino] != -1) // si aun poseo un vertice previ
 			print(this.previo[destino]); // recursivamente sigo explorando
 		this.camino.add(destino);
-//		System.out.printf("%d ", destino);
+		System.out.printf("%d ", destino);
 
 		return this.camino;
 	}
@@ -87,7 +87,6 @@ public class Dijkstra {
 		this.Q.add(new NodeDijkstra(inicial, new Double (0)));
 		this.distancia[inicial] = new Double (0);
 		int actual, adyacente;
-		Double peso= new Double("0");
 		while (!this.Q.isEmpty()) {
 			actual = this.Q.element().first;
 			this.Q.remove();
@@ -97,24 +96,26 @@ public class Dijkstra {
 			this.visitado[actual] = true; // Marco como visitado el vértice
 											// actual
 			// reviso los adyacentes del vertice actual
+			Double peso= new Double("1");
 			Integer size = this.graph.getListaNodos().get(actual).getListaEnlaces().size();
 			for (Integer i = 0; i < size; i++) {
-				adyacente = this.graph.getListaNodos().get(actual).getListaEnlaces().get(i).getnodo().getId(); // id del
+				peso = 1.0;
+				adyacente = this.graph.getListaNodos().get(actual).getListaEnlaces().get(i).getnodo().getId() - 1; // id del
 																		// vertice
 																		// adyacente
 
-				//El peso es igual a la cantidad de slots libre
+				//El peso es igual a la cantidad de slots ocupado
 				for(EONSlotDir slot: this.graph.getListaNodos().get(actual).getListaEnlaces().get(i).getSlots()){
 					if(slot.isOcupado()){
 						peso= peso+1;
 					}
 				}
-				System.out.println("Nodo " + adyacente);
-				/*if (!this.visitado[adyacente]) {
+				if (!this.visitado[adyacente]) {
 					relajacion(actual, adyacente, peso);
-				}*/
+				}
 			}
 		}
+		print(5);
 	}
 
 	public SustrateNetworkDir getGraph() {

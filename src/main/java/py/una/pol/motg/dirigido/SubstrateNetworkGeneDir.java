@@ -57,7 +57,7 @@ public class SubstrateNetworkGeneDir {
 	}
 
 	public void generar() throws IOException{
-		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\ContarNodos.txt"));
+		BufferedReader buffer = new BufferedReader(new FileReader("src\\main\\java\\requerimientos\\SustrateNetwork.txt"));
 		List<SustrateNodeDir> nodos = new ArrayList<SustrateNodeDir>();
 		Integer id = 1;
 		try {
