@@ -30,7 +30,7 @@ public class Main2
    
     	}*/
     	ObtenerConectados conectados = new ObtenerConectados();
-    	conectados.obtener(redFisica.getNetwork());
+    	conectados.obtener(redFisica.getNetwork(), 2);
     }
     
 }

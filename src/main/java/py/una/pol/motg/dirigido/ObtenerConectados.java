@@ -21,7 +21,7 @@ public class ObtenerConectados {
 	}
 
 
-	public void obtener(SustrateNetworkDir network){
+	public List<Conectado> obtener(SustrateNetworkDir network, Integer nodoTotalRequest){
 		Integer id = 0;
 		boolean existeNodo = true;
 		//controlar que tenga mas de 0 nodos
@@ -66,6 +66,33 @@ public class ObtenerConectados {
 			}
 			System.out.println("total de conectados " + this.listaConectados.size());
 		}
+		Integer indice = -1;
+		Integer mayor = 0;
+		List<Conectado> auxiliar = new ArrayList<Conectado>();
+		boolean ordenado = true;
+		Integer fin = this.listaConectados.size() - 1;
+		Integer j = 0;
+		while(ordenado){
+			mayor = 0;
+			indice = -1;
+			for (int i = 0; i < this.listaConectados.size(); i++) {
+				if(mayor < this.listaConectados.get(i).getListaConectados().size() && 
+						this.listaConectados.get(i).getListaConectados().size() >= nodoTotalRequest ){
+					mayor = this.listaConectados.get(i).getListaConectados().size();
+					indice = i;
+				}
+			}
+			if(indice != -1){
+				auxiliar.add(this.listaConectados.get(indice));
+			}
+			this.listaConectados.remove(indice);
+			
+			if(j==fin){
+				ordenado = false;
+			}
+			j++;
+		}
+		return auxiliar;
 	}
 	
 	//funcion encargada de comprobar que un id de nodo del enlace se encuentra o no en listaConectados
