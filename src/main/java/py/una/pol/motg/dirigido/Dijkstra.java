@@ -44,12 +44,23 @@ public class Dijkstra {
 	private boolean visitado[] = new boolean[MAX]; 
 	private PriorityQueue<NodeDijkstra> Q = new PriorityQueue<NodeDijkstra>();
 	private int previo[] = new int[MAX]; // para la impresion de caminos
+	private int nodoDestino; //
 
 
 	public Dijkstra(SustrateNetworkDir  sustrateGraph) {
 
 		this.graph = sustrateGraph;
 	}
+
+	public int getNodoDestino() {
+		return nodoDestino;
+	}
+
+	public void setNodoDestino(int nodoDestino) {
+		this.nodoDestino = nodoDestino;
+	}
+
+
 
 	// función de inicialización
 	public void init() {
@@ -82,7 +93,7 @@ public class Dijkstra {
 		return this.camino;
 	}
 
-	public void doDijkstra(int inicial) {
+	public Boolean doDijkstra(int inicial) {
 		init();
 		this.Q.add(new NodeDijkstra(inicial, new Double (0)));
 		this.distancia[inicial] = new Double (0);
@@ -115,7 +126,13 @@ public class Dijkstra {
 				}
 			}
 		}
-		print(5);
+		print(this.nodoDestino);
+		if (this.camino.size()>0){
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 
 	public SustrateNetworkDir getGraph() {
