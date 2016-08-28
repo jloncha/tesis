@@ -4,10 +4,17 @@ import java.util.List;
 
 import py.una.pol.motg.dirigido.Conectado;
 import py.una.pol.motg.dirigido.LAGDir;
+import py.una.pol.motg.dirigido.ListMapVRDir;
+import py.una.pol.motg.dirigido.MapVRDir;
 import py.una.pol.motg.dirigido.NodeMappingDir;
 import py.una.pol.motg.dirigido.ObtenerConectados;
 import py.una.pol.motg.dirigido.SustrateNetworkDir;
+import py.una.pol.motg.dirigido.SustrateNodeDir;
+import py.una.pol.motg.dirigido.VirtualLinkDir;
 import py.una.pol.motg.dirigido.VirtualNetworkDir;
+import py.una.pol.motg.dirigido.VirtualNodeDir;
+import py.una.pol.motg.impl.LinkMapping;
+import py.una.pol.motg.objects.VirtualLink;
 
 public class LaLrcLaSp {
 
@@ -67,14 +74,40 @@ public class LaLrcLaSp {
             	asignado = nodeMapping.mapearNodos(network, virtualNetwork, this.n);
             	nodeMapping.getListaMapeados();
             	if(asignado){
-            			//llamar a la funcion de jean descomponiendo el request virtual
-            			/*devolver un boolean
-            			dentro de la clase tener como quedo finalmente
-            			idfisico - idvirtual - camino - indice donde empieza el k slot
-            			if(exitoCompleto){
-            				imprimir valores
-            				return succes;
-            			}*/
+            		LinkMapping mapeoLink= new LinkMapping();
+            		for (MapVRDir nodo : nodeMapping.getListaMapeados().getMapRequest()) {
+            			//Recuperar los enlaces virtuales
+            			//Primero obtenemos todos los nodos de la red virtual
+            			for (VirtualNodeDir nodoVirtual: virtualNetwork.getNodos()) {
+            				//Si el nodo virtual es igual al que estamos buscando
+            				//Buscamos todos sus enlaces
+            				if(nodoVirtual.getId()==nodo.getIdRequest()){
+            					//Una vez que tenemos el nodo procedemos
+            					SustrateNodeDir nodo1 = capa.getListaNodos().get(nodo.getIdFisico()-1); 
+            					SustrateNodeDir nodo2 = new SustrateNodeDir();
+            					for (VirtualLinkDir enlaceVirtual : nodoVirtual.getListaEnlaces()) {
+            						//Buscamos el segundo nodo virtual para armar el enlace
+            						for(MapVRDir nodoMap : nodeMapping.getListaMapeados().getMapRequest()){
+            							if(nodoMap.getIdRequest()== enlaceVirtual.getNodoVirtual().getId()){
+            								nodo2 = capa.getListaNodos().get(nodoMap.getIdFisico()-1);
+            							}
+            						}
+            						//Buscamos si se puede mapear, si se mapea tiene true
+            						Boolean resp = mapeoLink.linkMappingByNode(capa,nodo1, nodo2);
+            						if(!resp){
+            							//Significa que no se pudo mapear
+            							break;
+            						}else{
+            							//Esta es la red final con el link mapeado
+            							//No se como asignar
+            							mapeoLink.getRedInterna();
+            						}
+            					}
+            					
+            				}
+						}
+            			
+					}
             	}
 			}
         	
