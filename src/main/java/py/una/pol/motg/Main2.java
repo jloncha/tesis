@@ -6,6 +6,7 @@ import py.una.pol.motg.dirigido.ObtenerConectados;
 import py.una.pol.motg.dirigido.SubstrateNetworkGeneDir;
 import py.una.pol.motg.dirigido.SustrateLinkDir;
 import py.una.pol.motg.dirigido.SustrateNodeDir;
+import py.una.pol.motg.principal.LaLrcLaSp;
 
 /**
  * @author Jean
@@ -29,8 +30,12 @@ public class Main2
 			}
    
     	}*/
-    	ObtenerConectados conectados = new ObtenerConectados();
-    	conectados.obtener(redFisica.getNetwork(), 2);
+    	
+    	LaLrcLaSp laLRC = new LaLrcLaSp(redFisica.getB(), redFisica.getN());
+    	laLRC.resultado(redFisica.getNetwork(), redFisica.getVirtualNetwork());
+    	
+    	/*ObtenerConectados conectados = new ObtenerConectados();
+    	conectados.obtener(redFisica.getNetwork(), 2);*/
     }
     
 }

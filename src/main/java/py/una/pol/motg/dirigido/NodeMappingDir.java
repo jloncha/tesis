@@ -28,12 +28,12 @@ public class NodeMappingDir {
 		SustrateNetworkDir laLRCsub = calcularLaLRC(sustrato);
 		VirtualNetworkDir lRCvirtual = calcularLRC(request, requerimiento);
 		
-		for (int i = laLRCsub.getListaNodos().size() - 1 ; i >= 0; i--) {
+		/*for (int i = laLRCsub.getListaNodos().size() - 1 ; i >= 0; i--) {
 			System.out.println("id" + laLRCsub.getListaNodos().get(i).getId() + " LaLRC " + laLRCsub.getListaNodos().get(i).getLaLRC());
 		}
 		for (int i = lRCvirtual.getNodos().size() - 1 ; i >= 0; i--) {
 			System.out.println("id" + lRCvirtual.getNodos().get(i).getId() + " LRC " + lRCvirtual.getNodos().get(i).getLRC());
-		}
+		}*/
 		
 		for (int i = lRCvirtual.getNodos().size() - 1 ; i >= 0; i--) {
 			mapeado.add(false);
@@ -53,8 +53,8 @@ public class NodeMappingDir {
 		}
 		
 		for (MapVRDir vrDir : this.listaMapeados.getMapRequest()) {
-			System.out.println("Nodo fisico" + vrDir.getIdFisico());
-			System.out.println("Nodo request" + vrDir.getIdRequest());
+			System.out.println("Nodo fisico " + vrDir.getIdFisico());
+			System.out.println("Nodo request " + vrDir.getIdRequest());
 		}
 		
 		if(this.listaMapeados.getMapRequest().size() == request.getNodos().size()){

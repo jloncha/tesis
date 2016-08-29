@@ -21,7 +21,7 @@ public class SubstrateNetworkGeneDir {
 	
 	public SubstrateNetworkGeneDir() throws IOException {
 		this.generar();
-		//this.generarVirtual();
+		this.generarVirtual();
 	}
 
 	public SustrateNetworkDir getNetwork() {

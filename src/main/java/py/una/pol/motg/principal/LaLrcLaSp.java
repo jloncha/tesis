@@ -4,18 +4,17 @@ import java.util.List;
 
 import py.una.pol.motg.dirigido.Conectado;
 import py.una.pol.motg.dirigido.LAGDir;
-import py.una.pol.motg.dirigido.ListMapVRDir;
 import py.una.pol.motg.dirigido.MapVRDir;
 import py.una.pol.motg.dirigido.NodeMappingDir;
 import py.una.pol.motg.dirigido.ObtenerConectados;
 import py.una.pol.motg.dirigido.RespLinkMapping;
+import py.una.pol.motg.dirigido.SustrateLinkDir;
 import py.una.pol.motg.dirigido.SustrateNetworkDir;
 import py.una.pol.motg.dirigido.SustrateNodeDir;
 import py.una.pol.motg.dirigido.VirtualLinkDir;
 import py.una.pol.motg.dirigido.VirtualNetworkDir;
 import py.una.pol.motg.dirigido.VirtualNodeDir;
 import py.una.pol.motg.impl.LinkMapping;
-import py.una.pol.motg.objects.VirtualLink;
 
 public class LaLrcLaSp {
 
@@ -79,7 +78,14 @@ public class LaLrcLaSp {
             		resp = mapearEnlacesCompleto(virtualNetwork, nodeMapping, capa);
             		if (resp.getMapeado()){
             			//Significa que pudo ser mapeado
-            			resp.getRedSustrato();//la red con los enlaces mapeados
+            			for (SustrateNodeDir nodo  : resp.getRedSustrato().getListaNodos()) {
+            				System.out.println("Nodo " + nodo.getId());
+            				for (SustrateLinkDir enlaceAux : nodo.getListaEnlaces()) {
+            					System.out.println("Enlace de " + nodo.getId() +"-->" + enlaceAux.getnodo().getId());
+							}
+						}
+            			
+            			//la red con los enlaces mapeados
             		}
             	}
 			}

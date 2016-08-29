@@ -30,7 +30,7 @@ public class LinkMapping {
 				for (Integer i = redSustrato.getListaNodos().size() - 1; i >= 0; i--) {
 					SustrateNodeDir nodo = redSustrato.getListaNodos().get(i);
 					if (nodo == nodo1) {
-						for (Integer j = nodo.getListaEnlaces().size(); j >= 0; i--) {
+						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; i--) {
 							SustrateLinkDir enlace = nodo.getListaEnlaces().get(j);
 							if (enlace.getnodo() == nodo2) {
 								// Significa que es el enlace que queremos
@@ -40,7 +40,7 @@ public class LinkMapping {
 							}
 						}
 					} else if (nodo == nodo2) {
-						for (Integer j = nodo.getListaEnlaces().size(); j >= 0; i--) {
+						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; i--) {
 							SustrateLinkDir enlace = nodo.getListaEnlaces().get(j);
 							if (enlace.getnodo() == nodo1) {
 								// Significa que es el enlace que queremos
