@@ -30,22 +30,22 @@ public class LinkMapping {
 				for (Integer i = redSustrato.getListaNodos().size() - 1; i >= 0; i--) {
 					SustrateNodeDir nodo = redSustrato.getListaNodos().get(i);
 					if (nodo == nodo1) {
-						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; i--) {
+						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; j--) {
 							SustrateLinkDir enlace = nodo.getListaEnlaces().get(j);
 							if (enlace.getnodo() == nodo2) {
 								// Significa que es el enlace que queremos
 								// eliminar
-								redInterna.getListaNodos().get(i).getListaEnlaces().remove(enlace);
+								redInterna.getListaNodos().get(j).getListaEnlaces().remove(enlace);
 
 							}
 						}
 					} else if (nodo == nodo2) {
-						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; i--) {
+						for (Integer j = nodo.getListaEnlaces().size()-1; j >= 0; j--) {
 							SustrateLinkDir enlace = nodo.getListaEnlaces().get(j);
 							if (enlace.getnodo() == nodo1) {
 								// Significa que es el enlace que queremos
 								// eliminar
-								redInterna.getListaNodos().get(i).getListaEnlaces().remove(enlace);
+								redInterna.getListaNodos().get(j).getListaEnlaces().remove(enlace);
 
 							}
 						}
@@ -55,6 +55,6 @@ public class LinkMapping {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return resp;
+		return true;
 	}
 }

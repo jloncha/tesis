@@ -73,7 +73,7 @@ public class LaLrcLaSp {
         	for (int i = conectados.size() - 1; i >= 0; i--) {
         		NodeMappingDir nodeMapping = new NodeMappingDir();
             	asignado = nodeMapping.mapearNodos(network, virtualNetwork, this.n);
-            	nodeMapping.getListaMapeados();
+            	//nodeMapping.getListaMapeados();
             	if(asignado){
             		resp = mapearEnlacesCompleto(virtualNetwork, nodeMapping, capa);
             		if (resp.getMapeado()){
