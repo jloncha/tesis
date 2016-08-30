@@ -46,16 +46,17 @@ public class NodeMappingDir {
 						System.out.println("J " + j + " I " + i);*/
 						MapVRDir vrDir = new MapVRDir(laLRCsub.getListaNodos().get(j).getId(), lRCvirtual.getNodos().get(i).getId());
 						this.listaMapeados.getMapRequest().add(vrDir);
+						laLRCsub.getListaNodos().get(j).setMapeado(true);
 						break;
 					}
 				}
 			}
 		}
 		
-		for (MapVRDir vrDir : this.listaMapeados.getMapRequest()) {
+		/*for (MapVRDir vrDir : this.listaMapeados.getMapRequest()) {
 			System.out.println("Nodo fisico " + vrDir.getIdFisico());
 			System.out.println("Nodo request " + vrDir.getIdRequest());
-		}
+		}*/
 		
 		if(this.listaMapeados.getMapRequest().size() == request.getNodos().size()){
 			return true;

@@ -53,18 +53,18 @@ public class ObtenerConectados {
 					}
 				} else {
 					//por si sea el primer elemento aislado, como ya cree inicialmente no hace falta agregar mas
-					//if(i != 0){
+					if(i != 0){
 						//si es una lista igual a cero quiere decir que es un nodo aislado
 						Conectado aislado = new Conectado();
 						List<Integer> listaAislado = new ArrayList<Integer>();
 						listaAislado.add(network.getListaNodos().get(i).getId());
 						aislado.setListaConectados(listaAislado);
 						listaConectados.add(aislado);
-					//}
+					}
 				}
 				
 			}
-			System.out.println("total de conectados " + this.listaConectados.size());
+			//System.out.println("total de conectados " + this.listaConectados.size());
 		}
 		Integer indice = -1;
 		Integer mayor = 0;
@@ -84,8 +84,9 @@ public class ObtenerConectados {
 			}
 			if(indice != -1){
 				auxiliar.add(this.listaConectados.get(indice));
+				this.listaConectados.remove(indice.intValue());//remove(indice);
 			}
-			this.listaConectados.remove(indice);
+			
 			
 			if(j==fin){
 				ordenado = false;
@@ -116,8 +117,8 @@ public class ObtenerConectados {
 	
 	//funcion encargada de comprobar que un id de nodo del enlace se encuentra o no en listaConectados
 	public void comprobarExistenciaYUnir(SustrateNodeDir nodoPadre, SustrateNodeDir nodoEnlace){
-		System.out.println("Nodo Origen " + nodoPadre.getId());
-		System.out.println("Nodo Destino " + nodoEnlace.getId());
+		//System.out.println("Nodo Origen " + nodoPadre.getId());
+		//System.out.println("Nodo Destino " + nodoEnlace.getId());
 		List<Conectado> fusionar;
 		fusionar = new ArrayList<Conectado>();
 		fusionar.addAll(listaConectados);
@@ -125,7 +126,7 @@ public class ObtenerConectados {
 			for (int j = 0; j < fusionar.size(); j++) {
 				if(i != j){
 					if(fusionar.get(i).getListaConectados().contains(nodoPadre.getId()) && fusionar.get(j).getListaConectados().contains(nodoEnlace.getId())){
-						System.out.println("Entro");
+						//System.out.println("Entro");
 						listaConectados.get(i).getListaConectados().addAll(fusionar.get(j).getListaConectados());
 						listaConectados.remove(j);
 						break;

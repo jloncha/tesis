@@ -88,7 +88,7 @@ public class Dijkstra {
 		if (this.previo[destino] != -1) // si aun poseo un vertice previ
 			print(this.previo[destino]); // recursivamente sigo explorando
 		this.camino.add(destino);
-		System.out.printf("%d ", destino);
+		//System.out.printf("%d ", destino);
 
 		return this.camino;
 	}

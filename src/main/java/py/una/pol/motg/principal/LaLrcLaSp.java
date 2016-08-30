@@ -72,8 +72,11 @@ public class LaLrcLaSp {
         	List<Conectado> conectados = conectado.obtener(capa, virtualNetwork.getNodos().size());
         	for (int i = conectados.size() - 1; i >= 0; i--) {
         		NodeMappingDir nodeMapping = new NodeMappingDir();
-            	asignado = nodeMapping.mapearNodos(network, virtualNetwork, this.n);
+            	asignado = nodeMapping.mapearNodos(capa, virtualNetwork, this.n);
             	//nodeMapping.getListaMapeados();
+            	for (MapVRDir mapeamiento : nodeMapping.getListaMapeados().getMapRequest()) {
+					System.out.println("Nodo Fisico " + mapeamiento.getIdFisico() + " Nodo Virtual " +mapeamiento.getIdRequest());
+				}
             	if(asignado){
             		resp = mapearEnlacesCompleto(virtualNetwork, nodeMapping, capa);
             		if (resp.getMapeado()){
@@ -84,11 +87,13 @@ public class LaLrcLaSp {
             					System.out.println("Enlace de " + nodo.getId() +"-->" + enlaceAux.getnodo().getId());
 							}
 						}
-            			
-            			//la red con los enlaces mapeados
+            			break;
             		}
             	}
 			}
+        	if(resp.getMapeado()){
+        		break;
+        	}
         	
         	
 		}
@@ -111,8 +116,9 @@ public class LaLrcLaSp {
 			for (VirtualNodeDir nodoVirtual : virtualNetwork.getNodos()) {
 				// Si el nodo virtual es igual al que estamos buscando
 				// Buscamos todos sus enlaces
+				System.out.println("Nodo Virtual " + nodoVirtual.getId());
 				if (nodoVirtual.getId() == nodo.getIdRequest()) {
-					// Una vez que tenemos el nodo procedemos
+					// Una vez que tenemos el nodo procedemos a buscar el enlace
 					SustrateNodeDir nodo1 = capa.getListaNodos().get(nodo.getIdFisico() - 1);
 					SustrateNodeDir nodo2 = new SustrateNodeDir();
 					for (VirtualLinkDir enlaceVirtual : nodoVirtual.getListaEnlaces()) {
